@@ -63,10 +63,12 @@ network <- st_sf(do.call(rbind, network_list_combined))
 saveRDS(network, here("data-in/freshwater-atlas-streams.RDS"))
 labels <- network %>% group_by(gnis_name) %>% slice_head(n=1)
 
-
+# Save figure
+png(here("fig/skeena-nass-rivers-map.png"), width=8, height=7, units="in", res=600)
 ggplot() +
   geom_sf(data = wshed) +
   geom_sf(data = wshed_nass) +
   geom_sf(data = network, color = "blue") +
   geom_sf_text(data=labels, aes(label=gnis_name), size=3) 
 #  ggplot2::geom_sf(data = rms) 
+dev.off()
