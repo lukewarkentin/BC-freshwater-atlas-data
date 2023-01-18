@@ -60,7 +60,7 @@ network_list_combined <- c(network_list, network_list_nass)
 # convert to sf object 
 network <- st_sf(do.call(rbind, network_list_combined))
 # Save as RDS object for mapping
-saveRDS(network, here("data-in/map-data/freshwater-atlas-streams.RDS"))
+saveRDS(network, here("data-in/freshwater-atlas-streams.RDS"))
 labels <- network %>% group_by(gnis_name) %>% slice_head(n=1)
 
 
@@ -68,5 +68,5 @@ ggplot() +
   geom_sf(data = wshed) +
   geom_sf(data = wshed_nass) +
   geom_sf(data = network, color = "blue") +
-  geom_sf_text(data=labels, aes(label=gnis_name), size=2) 
+  geom_sf_text(data=labels, aes(label=gnis_name), size=3) 
 #  ggplot2::geom_sf(data = rms) 
